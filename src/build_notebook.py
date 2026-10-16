@@ -37,6 +37,10 @@ Este notebook está organizado conforme as *Atividades a Desenvolver* do enuncia
 6. Branch and Bound (árvore de busca, solução ótima inteira)
 7. Análise crítica: *integrality gap* e poda de ramos
 8. Discussão e comparação com a solução das IAs
+
+> ▶️ **Como executar:** no Colab, use **Ambiente de execução → Executar tudo** (*Runtime → Run all*).
+> O notebook instala o PuLP automaticamente e roda o projeto completo (download da instância,
+> modelagem, Simplex, Branch and Bound e figuras). Não é necessária nenhuma chave de IA.
 """)
 
 md(r"""## 1. Síntese do problema (máx. 5 linhas)
