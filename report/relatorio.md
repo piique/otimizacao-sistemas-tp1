@@ -19,7 +19,7 @@
 5. [Relaxação linear (Simplex)](#5-relaxação-linear-simplex)
 6. [Algoritmo Branch and Bound](#6-algoritmo-branch-and-bound)
 7. [Análise crítica: integrality gap e poda](#7-análise-crítica-integrality-gap-e-poda)
-8. [Discussão e comparação com a solução da IA](#8-discussão-e-comparação-com-a-solução-da-ia)
+8. [Discussão e comparação com as soluções das IAs](#8-discussão-e-comparação-com-as-soluções-das-ias)
 9. [Referências](#9-referências)
 
 ---
@@ -278,9 +278,12 @@ COL153, COL155, COL156, COL158` — e `COL160 = 3360`.
 
 ### 6.3 Árvore de busca (3 primeiros níveis)
 
-A Figura 1 (arquivo `figures/arvore_3niveis.png`) mostra os três primeiros níveis de
-ramificação. Cada nó exibe o limitante obtido pela relaxação linear e cada aresta indica a
-variável e o sentido da ramificação. A Tabela abaixo detalha os limites por nó:
+A Figura 1 mostra os três primeiros níveis de ramificação. Cada nó exibe o limitante
+obtido pela relaxação linear e cada aresta indica a variável e o sentido da ramificação.
+
+![Árvore de busca — três primeiros níveis de ramificação](../figures/arvore_3niveis.png)
+
+A Tabela abaixo detalha os limites por nó:
 
 | Nível | Nó | Limitante Z | Status | Ramificação |
 |---|---|---|---|---|
@@ -312,7 +315,9 @@ $$
 4860 \to 4630 \to 4505 \to 4135 \to 3680 \to 3640 \to \mathbf{3360}
 $$
 
-A Figura 2 (`figures/convergencia.png`) ilustra essa evolução.
+A Figura 2 ilustra essa evolução.
+
+![Evolução do incumbente ao longo do Branch and Bound](../figures/convergencia.png)
 
 ---
 
