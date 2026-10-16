@@ -1,5 +1,7 @@
 # TP1 — Resolução de Problemas Lineares Inteiros via Simplex e Branch and Bound
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/piique/otimizacao-sistemas-tp1/blob/main/notebooks/TP1_misc03.ipynb)
+
 **Instância:** `misc03` — MIPLIB 2017 (Benchmark Set)
 160 variáveis (159 binárias + 1 contínua), 96 restrições, 2.053 não-zeros.
 
@@ -9,6 +11,14 @@
 | Z inteiro ótimo | 3360,00 |
 | Integrality gap | 43,15% |
 | Nós do B&B próprio | 961 |
+
+## Entrega
+
+- **Notebook (Google Colab):**
+  <https://colab.research.google.com/github/piique/otimizacao-sistemas-tp1/blob/main/notebooks/TP1_misc03.ipynb>
+  — basta "Executar tudo"; o notebook baixa a instância, instala o PuLP e calcula tudo (não precisa de chave de IA).
+- **Relatório (PDF):** [`report/relatorio.pdf`](report/relatorio.pdf) — subir no Google Drive e
+  compartilhar como público.
 
 ## Estrutura
 
@@ -35,9 +45,12 @@
 ├── figures/                   # arvore_3niveis.png, arvore_completa.png, ...
 ├── results/resumo.json        # métricas em formato estruturado
 ├── report/
-│   ├── relatorio.md           # relatório (exportar para PDF)
+│   ├── relatorio.md           # relatório (fonte)
+│   ├── relatorio.pdf          # relatório final (pandoc + xelatex)
+│   ├── build_pdf.sh           # gera o PDF em Docker
+│   ├── Dockerfile.pdf         # imagem pandoc/LaTeX do PDF
+│   ├── pdf_filter.lua         # ajuste de glifos Unicode
 │   └── ai_answers/            # respostas das IAs (nao_agentico/, agentico/, preliminar/)
-└── report/relatorio.md
 ```
 
 ## Uso

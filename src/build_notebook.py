@@ -15,7 +15,9 @@ code = lambda s: CELLS.append(("code", s))
 
 
 # --------------------------------------------------------------------------
-md(r"""# TP1 - Resolução de Problemas Lineares Inteiros via Simplex e Branch and Bound
+md(r"""[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/piique/otimizacao-sistemas-tp1/blob/main/notebooks/TP1_misc03.ipynb)
+
+# TP1 - Resolução de Problemas Lineares Inteiros via Simplex e Branch and Bound
 
 **Instância:** `misc03` — MIPLIB 2017 (Benchmark Set)
 
