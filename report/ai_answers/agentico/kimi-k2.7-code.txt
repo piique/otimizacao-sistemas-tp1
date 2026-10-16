@@ -1,0 +1,54 @@
+Resolvi a instância MIPLIB **misc03** lendo os três CSVs, montando o modelo no PuLP e chamando o CBC. O script `solve_misc03.py` foi criado no workspace (ele carrega os CSVs, constrói as variáveis, a função objetivo, as 96 restrições, resolve a relaxação linear e depois o MIP inteiro). Os logs do CBC (`misc03_lp.log` e `misc03_ip.log`) já confirmam os resultados.
+
+Abaixo está a resposta objetiva solicitada.
+
+---
+
+### 1. Síntese do problema
+A instância misc03 possui **160 variáveis** (159 binárias/inteiras e 1 contínua), **96 restrições** lineares e **2.053 coeficientes não nulos**. É um problema de **minimização**: apenas uma variável aparece na função objetivo, com coeficiente 1. As restrições misturam igualdades (`=`), desigualdades `≤` e `≥`.
+
+### 2. Formulação matemática compacta
+
+\[
+\begin{aligned}
+\min_{x} \quad & c^\top x \\
+\text{s.a.} \quad & A_i x = b_i, && i \in \mathcal E \\
+& A_i x \le b_i, && i \in \mathcal L \\
+& A_i x \ge b_i, && i \in \mathcal G \\
+& x_j \in \{0,1\}, && j \in \mathcal I \\
+& x_j \in [l_j,u_j], && j \notin \mathcal I
+\end{aligned}
+\]
+
+onde \(|\mathcal E|=27\), \(|\mathcal L|=38\), \(|\mathcal G|=31\), \(|\mathcal I|=159\), e a função objetivo reduz-se a minimizar uma única variável com coeficiente unitário.
+
+### 3. Relaxação linear
+- **Z_LP = 1910**
+- CBC resolveu em **74 iterações**, tempo de wallclock **0.01 s**.
+
+### 4. Ótimo inteiro (Branch and Bound)
+- **Z_IP = 3360**
+- CBC explorou **350 nós**, com **22.739 iterações** simplex, em **3.55 s** de wallclock.
+
+### 5. Integrality gap e poda do Branch and Bound
+O **integrality gap** mede o quanto o valor inteiro se afasta da relaxação linear:
+
+\[
+\text{GAP} = \frac{Z_{IP}-Z_{LP}}{Z_{IP}}\times 100
+          = \frac{3360-1910}{3360}\times 100
+          \approx 43.15\%.
+\]
+
+No Branch-and-Bound, o CBC poda um ramo sempre que:
+- o **bound LP do subproblema é pior** do que a melhor solução inteira já encontrada (incumbente);
+- o subproblema se torna **inviável**;
+- o subproblema termina com uma **solução inteira ótima** (não há necessidade de ramificar mais).
+
+Cortes gerados na raiz (probing, Gomory, knapsack, two-mir, zero-half) elevaram o bound de 1910 para **2555.55**, acelerando a poda.
+
+---
+
+RESUMO NUMERICO
+Z_LP = 1910
+Z_IP = 3360
+GAP_PCT = 43.154762

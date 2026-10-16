@@ -1,0 +1,58 @@
+## 1. Síntese do problema
+
+O `misc03` é um programa linear inteiro misto (MIPLIB) com **160 variáveis** — 159 binárias `{0,1}` e **1 variável contínua livre** (`COL160`, única com coeficiente objetivo ≠ 0) — e **96 restrições** (27 igualdades `E`, 38 `≤` `L`, 31 `≥` `G`), com **2.053 coeficientes não-nulos**. `COL160` aparece em uma única igualdade (`ROW001`, RHS = 0), de modo que ela é determinada pelas binárias e o objetivo equivale a minimizar uma soma ponderada de um subconjunto destas. A estrutura (atribuições `=1`, capacidades `≤200`, muitos RHS `=1`) caracteriza um problema combinatório de seleção/recobrimento. É uma instância de **minimização**.
+
+## 2. Função objetivo e restrições (forma compacta)
+
+Seja `B = {COL001,…,COL159}` o conjunto das binárias e `t = x_{COL160}` a variável contínua.
+
+$$
+\min \; z = t
+$$
+
+$$
+\text{s.t.}\quad
+t \;-\; \sum_{j\in B} w_j\,x_j = 0 \qquad (\text{ROW001})
+$$
+
+$$
+\sum_{j\in B} a_{ij}\,x_j \;\; \begin{cases} = b_i\\ \le b_i\\ \ge b_i \end{cases} \qquad i = 2,\dots,96
+$$
+
+$$
+x_j \in \{0,1\}\;\; (j\in B), \qquad t \in \mathbb{R}\ (\text{livre}).
+$$
+
+Na relaxação linear troca-se `x_j ∈ {0,1}` por `0 ≤ x_j ≤ 1` e mantém-se `t` livre.
+
+## 3. Relaxação linear (LP)
+
+A relaxação linear foi resolvida diretamente com CBC:
+
+- **Z_LP = 1910,0**
+- **Tempo ≈ 0,02 s** (processamento praticamente instantâneo)
+
+## 4. Ótimo inteiro (Branch & Bound)
+
+- **Z_IP = 3360,0**
+- **Tempo ≈ 1,95 s** (CBC, B&B completo)
+- Status: `Optimal` em ambos os casos.
+
+## 5. Integrality gap e poda no B&B
+
+**Gap de integralidade** é a diferença entre o ótimo inteiro e o ótimo da relaxação linear, que é o "preço da integralidade". Para minimização, `Z_LP` é um **limite inferior** válido:
+
+$$
+\text{GAP} = \frac{Z_{IP}-Z_{LP}}{|Z_{IP}|} = \frac{3360-1910}{3360} = 43{,}15\%.
+$$
+
+Ele existe porque o LP pode fracionar as binárias; a igualdade que define `t` faz a variável contínua absorver combinações fracionárias da soma ponderada, produzindo um valor artificialmente baixo (1910) que nenhuma solução 0‑1 atinge.
+
+**Como o B&B poda:** em cada nó resolve-se a relaxação linear obtendo um limite `L` (para min). Se `L ≥` melhor solução inteira encontrada (incumbente `U`), o ramo é **podado por limite**, pois nenhuma solução inteira dali pode melhorar `U`. Se a solução do LP já é inteira, ela é um candidato (atualiza `U`). Caso contrário, escolhe-se uma variável fracionária `x_j` e criam-se dois nós, `x_j=0` e `x_j=1` (ramificação). Nesta instância, a poda reduz drasticamente a árvore: o LP inicial dista 43% do ótimo, mas os subproblemas rapidamente atingem limites que superam `U=3360`, fechando a enumeração em ~2 s.
+
+---
+
+RESUMO NUMERICO
+Z_LP = 1910.0
+Z_IP = 3360.0
+GAP_PCT = 43.15

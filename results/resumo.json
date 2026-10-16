@@ -1,0 +1,222 @@
+{
+  "instancia": {
+    "nome": "MISC03",
+    "variaveis": 160,
+    "variaveis_inteiras": 159,
+    "variaveis_continuas": 1,
+    "restricoes": 96,
+    "nao_zeros": 2053,
+    "sentinela_mps": {
+      "NAME": "misc03",
+      "ROWS": "96",
+      "COLUMNS": "160",
+      "INTEGER": "159",
+      "NONZERO": "2053",
+      "BEST SOLN": "3360 (opt)",
+      "LP SOLN": "1910.0",
+      "SOURCE": "",
+      "APPLICATION": "unknown",
+      "COMMENTS": "all integer variables are binary"
+    }
+  },
+  "relaxacao_linear": {
+    "Z_relax": 1910.0,
+    "tempo_s": 0.007638894021511078,
+    "status": "Optimal",
+    "n_fracionarias": 12,
+    "fracionarias": {
+      "COL006": 0.5,
+      "COL011": 0.5,
+      "COL024": 0.5,
+      "COL028": 0.5,
+      "COL046": 0.5,
+      "COL063": 0.5,
+      "COL065": 0.5,
+      "COL076": 0.5,
+      "COL094": 0.5,
+      "COL101": 0.5,
+      "COL119": 0.5,
+      "COL135": 0.5
+    }
+  },
+  "inteiro_cbc": {
+    "Z_ip": 3360.0,
+    "tempo_s": 1.890011210925877,
+    "status": "Optimal"
+  },
+  "branch_and_bound_proprio": {
+    "Z_bb": 3360.0,
+    "proven_optimal": true,
+    "nos": 961,
+    "lps_resolvidos": 961,
+    "tempo_s": 1.3891035839915276,
+    "status_nos": {
+      "fractional": 480,
+      "infeasible": 129,
+      "integer": 7,
+      "pruned_bound": 345
+    },
+    "profundidade_maxima": 47,
+    "raiz": {
+      "node_id": 0,
+      "lp_bound": 1910.0,
+      "status": "fractional"
+    },
+    "nivel_1": [
+      {
+        "node_id": 1,
+        "bound": 1910.0,
+        "status": "fractional",
+        "var": "COL005",
+        "dir": "<="
+      },
+      {
+        "node_id": 928,
+        "bound": 2735.0,
+        "status": "fractional",
+        "var": "COL005",
+        "dir": ">="
+      }
+    ],
+    "nivel_2": [
+      {
+        "node_id": 2,
+        "bound": 1910.0,
+        "status": "fractional",
+        "var": "COL006",
+        "dir": "<="
+      },
+      {
+        "node_id": 899,
+        "bound": 2735.0,
+        "status": "fractional",
+        "var": "COL006",
+        "dir": ">="
+      },
+      {
+        "node_id": 929,
+        "bound": 2740.0,
+        "status": "fractional",
+        "var": "COL061",
+        "dir": "<="
+      },
+      {
+        "node_id": 954,
+        "bound": 3161.25,
+        "status": "fractional",
+        "var": "COL061",
+        "dir": ">="
+      }
+    ],
+    "nivel_3": [
+      {
+        "node_id": 3,
+        "bound": 2014.9999999999998,
+        "status": "fractional",
+        "var": "COL004",
+        "dir": "<="
+      },
+      {
+        "node_id": 872,
+        "bound": 2735.0,
+        "status": "fractional",
+        "var": "COL004",
+        "dir": ">="
+      },
+      {
+        "node_id": 900,
+        "bound": 2740.0,
+        "status": "fractional",
+        "var": "COL061",
+        "dir": "<="
+      },
+      {
+        "node_id": 921,
+        "bound": 3161.25,
+        "status": "fractional",
+        "var": "COL061",
+        "dir": ">="
+      },
+      {
+        "node_id": 930,
+        "bound": 2854.2857142857147,
+        "status": "fractional",
+        "var": "COL052",
+        "dir": "<="
+      },
+      {
+        "node_id": 953,
+        "bound": 3662.5,
+        "status": "pruned_bound",
+        "var": "COL052",
+        "dir": ">="
+      },
+      {
+        "node_id": 955,
+        "bound": 3161.25,
+        "status": "fractional",
+        "var": "COL070",
+        "dir": "<="
+      },
+      {
+        "node_id": 960,
+        "bound": 3662.5,
+        "status": "pruned_bound",
+        "var": "COL070",
+        "dir": ">="
+      }
+    ],
+    "historico_incumbente": [
+      [
+        53,
+        4860.0
+      ],
+      [
+        114,
+        4630.0
+      ],
+      [
+        117,
+        4505.0
+      ],
+      [
+        167,
+        4135.0
+      ],
+      [
+        219,
+        3680.0
+      ],
+      [
+        264,
+        3640.0
+      ],
+      [
+        454,
+        3360.0
+      ]
+    ],
+    "solucao": {
+      "COL020": 1.0,
+      "COL023": 1.0,
+      "COL063": 1.0,
+      "COL079": 1.0,
+      "COL094": 1.0,
+      "COL118": 1.0,
+      "COL131": 1.0,
+      "COL135": 1.0,
+      "COL148": 1.0,
+      "COL149": 1.0,
+      "COL151": 1.0,
+      "COL153": 1.0,
+      "COL155": 1.0,
+      "COL156": 1.0,
+      "COL158": 1.0,
+      "COL160": 3360.0
+    }
+  },
+  "integrality_gap": {
+    "absoluto": 1450.0,
+    "relativo_pct": 43.154761904761905
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "modo": "agentico",
+  "descricao": "Modelos puderam criar e executar codigo Python (PuLP + CBC) em um container Docker isolado, lendo os CSVs da instancia.",
+  "data": "2026-10-16",
+  "interface": "Ollama Cloud (plano Pro)",
+  "referencia_equipe": {
+    "Z_LP": 1910.0,
+    "Z_IP": 3360.0,
+    "GAP_PCT": 43.15
+  },
+  "respostas": [
+    {
+      "modelo": "GLM 5.3",
+      "id": "glm-5.3",
+      "arquivo": "glm-5.3.txt",
+      "chamadas_de_ferramenta": 76,
+      "Z_LP": 1910.0,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 43.15,
+      "correto": true,
+      "observacao": "Resolveu com CBC; reportou 350 nos e 22.739 iteracoes simplex."
+    },
+    {
+      "modelo": "DeepSeek V4.1 Flash",
+      "id": "deepseek-v4.1-flash:cloud",
+      "arquivo": "deepseek-v4.1-flash.txt",
+      "chamadas_de_ferramenta": 48,
+      "Z_LP": 1910.0,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 43.15,
+      "correto": true,
+      "observacao": "Montou o modelo no PuLP e resolveu LP e IP com CBC."
+    },
+    {
+      "modelo": "Kimi K2.7 Code",
+      "id": "kimi-k2.7-code:cloud",
+      "arquivo": "kimi-k2.7-code.txt",
+      "chamadas_de_ferramenta": 99,
+      "Z_LP": 1910.0,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 43.154762,
+      "correto": true,
+      "observacao": "Reportou 350 nos, 22.739 iteracoes simplex e cortes na raiz (bound 1910 -> 2555,55)."
+    }
+  ]
+}

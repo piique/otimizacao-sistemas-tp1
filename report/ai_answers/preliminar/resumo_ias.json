@@ -1,0 +1,30 @@
+[
+  {
+    "modelo": "gpt-oss:120b",
+    "arquivo": "gptoss120b.txt",
+    "Z_LP_reportado": "-inf",
+    "Z_IP_reportado": "-inf",
+    "GAP_PCT_reportado": "0"
+  },
+  {
+    "modelo": "gpt-oss:20b",
+    "arquivo": "gptoss20b.txt",
+    "Z_LP_reportado": "955.00",
+    "Z_IP_reportado": "955.00",
+    "GAP_PCT_reportado": "0.00"
+  },
+  {
+    "modelo": "nemotron-3-super",
+    "arquivo": "nemotron_super.txt",
+    "Z_LP_reportado": "0",
+    "Z_IP_reportado": "0",
+    "GAP_PCT_reportado": "0"
+  },
+  {
+    "modelo": "gemma4:31b",
+    "arquivo": "gemma4.txt",
+    "Z_LP_reportado": "205.0",
+    "Z_IP_reportado": "205.0",
+    "GAP_PCT_reportado": "0.0"
+  }
+]

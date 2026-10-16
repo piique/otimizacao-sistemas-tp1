@@ -1,0 +1,43 @@
+{
+  "modo": "nao_agentico",
+  "descricao": "Modelos receberam os dados no prompt e responderam apenas com texto, sem executar codigo.",
+  "data": "2026-09-25",
+  "interface": "Ollama Cloud (plano Pro)",
+  "referencia_equipe": {
+    "Z_LP": 1910.0,
+    "Z_IP": 3360.0,
+    "GAP_PCT": 43.15
+  },
+  "respostas": [
+    {
+      "modelo": "GLM 5.3",
+      "id": "glm-5.3",
+      "arquivo": "glm-5.3.txt",
+      "Z_LP": 3360.0,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 0.0,
+      "correto": false,
+      "observacao": "Assumiu que a relaxacao LP ja e inteira; errou Z_LP e gap."
+    },
+    {
+      "modelo": "DeepSeek V4.1 Flash",
+      "id": "deepseek-v4.1-flash:cloud",
+      "arquivo": "deepseek-v4.1-flash.txt",
+      "Z_LP": 3360.0,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 0.0,
+      "correto": false,
+      "observacao": "Afirmou que o politopo e integral no otimo; errou Z_LP e gap."
+    },
+    {
+      "modelo": "Kimi K2.7 Code",
+      "id": "kimi-k2.7-code:cloud",
+      "arquivo": "kimi-k2.7-code.txt",
+      "Z_LP": 1916.295,
+      "Z_IP": 3360.0,
+      "GAP_PCT": 42.97,
+      "correto": false,
+      "observacao": "Unico a reconhecer gap nao nulo; Z_LP aproximado (real 1910) e gap 42,97% (real 43,15%)."
+    }
+  ]
+}

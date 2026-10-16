@@ -1,0 +1,7 @@
+1) misc03: 159 vars binárias + 1 contínua livre, 96 restrições; objetivo min x160.
+2) Z_LP ≈ 1916.295
+3) Z_IP = 3360
+4) gap ≈ 42.97% (≈43%)
+5) Poda B&B: instância MIPLIB fácil; com cortes modernos resolve na raiz (0 nós), B&B puro usa poucas dezenas de nós.
+
+Z_LP=1916.295 / Z_IP=3360 / GAP_PCT=42.97

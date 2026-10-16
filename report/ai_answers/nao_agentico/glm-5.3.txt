@@ -1,0 +1,7 @@
+1) **Síntese**: MIPLIB misc03 — problema de escalonamento multi-período; 159 variáveis binárias (custo 0) + 1 contínua x160 (custo 1, minimizada); 96 restrições de atribuição, capacidade e sequenciamento.
+2) **Z_LP**: relaxação linear no nó raiz já fornece 3360 (valor integral).
+3) **Z_IP**: ótimo inteiro = 3360.
+4) **Gap%**: 0,00% — relaxação LP é exata.
+5) **Poda B&B**: árvore trivial — LP raiz integral → solução incumbente = bound raiz → poda total do nó raiz; sem branch efetivo.
+
+Z_LP=3360 / Z_IP=3360 / GAP_PCT=0.00

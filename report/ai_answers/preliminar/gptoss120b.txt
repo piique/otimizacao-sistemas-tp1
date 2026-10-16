@@ -1,0 +1,52 @@
+> analista · gpt-oss:120b
+
+**1. Síntese do problema (≤ 5 linhas)**  
+Trata‑se de um modelo de Programação Inteira MIPLIB “misc03” com 159 variáveis binárias (COL001…COL159) e uma variável contínua livre (COL160) que possui coeficiente 1.0 na função objetivo. Todas as demais variáveis têm coeficiente 0. O modelo contém 96 restrições de igualdade, desigualdade e limite superior/inferior, mas **nenhuma restrição envolve COL160**.
+
+**2. Formulação matemática compacta**  
+
+\[
+\begin{aligned}
+\min\;  &  Z = 1\cdot x_{160}  \\
+\text{sujeito a } &
+\sum_{j\in A_{r}} a_{rj}\,x_j = b_r     && r\in \mathcal{E}\\
+& \sum_{j\in A_{r}} a_{rj}\,x_j \le b_r && r\in \mathcal{L}\\
+& \sum_{j\in A_{r}} a_{rj}\,x_j \ge b_r && r\in \mathcal{G}\\
+& x_j\in\{0,1\},\qquad j=1,\dots ,159\\
+& x_{160}\in \mathbb{R}\;(\text{sem limites}) .
+\end{aligned}
+\]
+
+* \(A_{r}\) é o conjunto de colunas que aparecem na restrição \(r\);  
+* \(a_{rj}\) são os coeficientes listados na seção 3;  
+* \(b_r\) é o RHS da restrição (coluna rhs).
+
+**3. Relaxação linear (ignora integralidade)**  
+
+Como a única variável que aparece na função objetivo (**x₁₆₀**) não aparece em nenhuma restrição, ela pode assumir qualquer valor real.  
+- Para **minimização**, o problema é **ilimitado inferior** → \(Z_{LP}= -\infty\).  
+- Para **maximização**, seria ilimitado superior → \(Z_{LP}= +\infty\).
+
+**4. Solução inteira (Branch‑and‑Bound)**  
+
+A ausência de restrições sobre \(x_{160}\) implica que a solução inteira também é **não limitada** (mesmo resultado que a relaxação).  
+Portanto,  
+\[
+Z_{IP}= -\infty \;(\text{minimização}) \qquad\text{ou}\qquad Z_{IP}=+\infty \;(\text{maximização}).
+\]
+
+Nenhum nodo do B & B necessita ser explorado; a poda ocorre imediatamente porque o bound do nó‑raiz já indica inviabilidade de um limite finito.
+
+**5. Integrality gap e poda no B & B**  
+
+- **Integrality gap** = \(\frac{Z_{IP}-Z_{LP}}{|Z_{LP}|}\) não está definido porque ambos os valores são infinitos; na prática, o gap é “zero” no sentido de que a solução inteira não melhora nem piora um bound finito (não existe).  
+- **Poda**: ao gerar o primeiro bound (da raiz) o algoritmo detecta que o problema não possui limites finitos; assim, todos os ramos subsequentes são descartados imediatamente, pois não podem gerar uma solução melhor que o bound infinito.
+
+---
+
+### RESUMO NUMÉRICO
+```
+Z_LP = -inf
+Z_IP = -inf
+GAP_PCT = 0
+```

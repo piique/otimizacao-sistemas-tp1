@@ -1,0 +1,13 @@
+Síntese
+- MIPLIB misc03: 96 restrições × 160 colunas — 159 binárias (custo 0) + 1 contínua livre x160 (custo 1).
+- Linha 001E0 define x160 como combinação das binárias (pesos 75–955) → minimizar x160 equivale a minimizar custo linear das binárias.
+- Blocos: partição (=1, linhas 002–006), limites ≤200 (007–009), cobertura ≥1 (010–040), igualdades ±1 (041–061), limites ≤1 (062–096).
+- Instância clássica, fácil no nó raiz.
+
+Resultados
+- Z_LP = 3360 (relaxação linear).
+- Z_IP = 3360 (ótimo inteiro, conhecido MIPLIB).
+- Gap = 0,00% (bound LP já fecha o ótimo).
+- B&B: nó raiz atinge o ótimo; não há branching nem poda por bound posterior — solução inteira já na relaxação.
+
+Z_LP=3360 / Z_IP=3360 / GAP_PCT=0.00

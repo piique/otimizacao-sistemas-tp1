@@ -1,0 +1,8 @@
+pulp==2.9.0
+pandas==2.2.3
+scipy==1.14.1
+matplotlib==3.9.2
+networkx==3.4.2
+jupyterlab==4.3.4
+nbformat==5.10.4
+nbconvert==7.16.6

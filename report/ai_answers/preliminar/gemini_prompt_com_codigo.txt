@@ -1,0 +1,22 @@
+Você é especialista em Pesquisa Operacional. Anexei três CSVs que descrevem a instância de programação inteira MIPLIB misc03:
+
+- misc03_variables.csv: colunas = column, lower, upper, is_integer, obj_coeff
+- misc03_constraints.csv: colunas = constraint, type (E = igualdade, L = <=, G = >=), rhs
+- misc03_coefficients.csv: colunas = constraint, column, value (2.053 coeficientes não-nulos)
+
+Você PODE executar código Python (use a ferramenta de análise de dados / execução de código) e instalar bibliotecas. Resolva a instância de verdade.
+
+Com base nesses dados, responda de forma objetiva:
+
+1. Síntese do problema em no máximo 5 linhas.
+2. Apresente a função objetivo e o conjunto de restrições em forma matemática compacta.
+3. Resolva a relaxação linear (ignore a restrição de integralidade) com um solver (ex.: PuLP + CBC) e informe Z relaxado e o tempo de processamento.
+4. Resolva o problema inteiro (Branch and Bound) e informe a solução ótima inteira.
+5. Explique o integrality gap e como o B&B poda ramos.
+
+No final, inclua exatamente esta seção:
+
+RESUMO NUMERICO
+Z_LP = <valor>
+Z_IP = <valor>
+GAP_PCT = <valor>

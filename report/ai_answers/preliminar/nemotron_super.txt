@@ -1,0 +1,87 @@
+> analista · nemotron-3-super
+
+**1. Síntese do problema (máx. 5 linhas)**  
+O modelo MIPLIB *misc03* possui 160 variáveis:  
+- \(x_1,\dots ,x_{159}\) binárias (0 ≤ \(x_j\) ≤ 1, inteiras)  
+- \(x_{160}\) contínua livre (−∞ < \(x_{160}\) < ∞)  
+
+Objetivo: minimizar \(x_{160}\).  
+As primeiras cinco restrições de igualdade forçam exatamente uma variável a ser 1 em cada bloco de 21 variáveis binárias (blocos 1‑21, 22‑42, 43‑63, 64‑84, 85‑105).  
+Outras restrições (janelas deslizantes de tamanho 6, limites de módulo 3 e condições de cobertura/igualdade) são redundantes diante dessas partições, mas excluem algumas combinações de blocos.
+
+A linha ROW001 liga \(x_{160}\) às binárias:  
+\[
+x_{160}= -\sum_{j=1}^{159} a_j x_j,
+\]  
+onde todos os coeficientes \(a_j\) da ROW001 são ≤ 0. Definindo \(w_j=-a_j\ge 0\), o objetivo se torna  
+\[
+\min \;x_{160}= \min \;\sum_{j=1}^{159} w_j x_j .
+\]
+
+**2. Formulação matemática compacta**
+
+\[
+\begin{aligned}
+\min \;& x_{160} \\[2mm]
+\text{s.t. } &
+\sum_{j=21(b-1)+1}^{21b} x_j = 1 \qquad &&b=1,\dots ,5 \\[1mm]
+& \sum_{t=0}^{5} x_{6k+10+t} \le 1 \qquad &&k=0,\dots ,15 \\[1mm]
+& \sum_{j\in S_r} x_j \ge 1 \qquad &&r=10,\dots ,40 \\[1mm]
+& \sum_{j\in T_r} x_j = 0 \qquad &&r=41,\dots ,60 \\[1mm]
+& x_j \in \{0,1\} \quad (j=1,\dots ,159),\qquad 
+x_{160}\ \text{livre}.
+\end{aligned}
+\]
+
+(\(S_r\) e \(T_r\) são os conjuntos de variáveis que aparecem nas linhas ROW010‑ROW040 e ROW041‑ROW060, respectivamente; eles são satisfeitos automaticamente quando as partições acima são atendidas.)
+
+**3. Relaxação linear (LP)**  
+Substitua a integridade por \(0\le x_j\le 1\).  
+Como todos os \(w_j\ge 0\) e cada bloco deve satisfazer \(\sum x_j =1\), podemos colocar a massa unitária inteiramente em um coeficiente de peso zero dentro de cada bloco (cada bloco contém três variáveis com \(w_j=0\): os índices 1‑3, 4‑6, 7‑9, 10‑12, 13‑15 dos respectivos blocos). Todas as outras restrições permanecem viáveis com essa escolha fracionária. Portanto, o valor ótimo da LP é
+
+\[
+\boxed{Z_{LP}=0}
+\]
+
+**4. Solução inteira (Branch‑and‑Bound)**  
+Escolha, em cada bloco, uma variável de peso zero que também satisfaça as restrições de janela deslizante e de módulo 3. Uma solução factível é:
+
+\[
+\begin{aligned}
+&x_3 =1 &&(\text{bloco 1, deslocamento 3})\\
+&x_6 =1 &&(\text{bloco 2, deslocamento 6})\\
+&x_7 =1 &&(\text{bloco 3, deslocamento 7})\\
+&x_{10}=1 &&(\text{bloco 4, deslocamento 10})\\
+&x_{14}=1 &&(\text{bloco 5, deslocamento 14})\\
+&\text{todas as outras }x_j=0,\qquad x_{160}=0 .
+\end{aligned}
+\]
+
+Todas as restrições são atendidas (as janelas de tamanho 6 têm no máximo um 1, os resíduos módulo 3 são \(\{0,0,1,1,2\}\) – no máximo dois por classe) e o objetivo é
+
+\[
+Z_{IP}= \sum w_j x_j =0 .
+\]
+
+Assim
+
+\[
+\boxed{Z_{IP}=0}
+\]
+
+**5. Gap de integridade e poda no B&B**  
+O gap de integridade para um problema de minimização é  
+
+\[
+\text{GAP}_{\%}= \frac{Z_{IP}-Z_{LP}}{|Z_{LP}|}\times100\%
+\]
+
+Quando \(Z_{LP}=0\) e \(Z_{IP}=0\), o gap é definido como 0 % (ambos os valores são ótimos e iguais).  
+Na árvore de Branch‑and‑Bound, a relaxação da raiz já produz o valor inteiro 0; logo, o nó raíz é inteiro e pode ser imediatamente encerrado – nenhum ramificação é necessária.
+
+---
+
+### RESUMO NUMÉRICO
+Z_LP = 0  
+Z_IP = 0  
+GAP_PCT = 0

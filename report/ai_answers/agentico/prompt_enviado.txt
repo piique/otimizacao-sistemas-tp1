@@ -1,0 +1,24 @@
+Você é especialista em Pesquisa Operacional. Na pasta atual estão três CSVs com a instância de programação inteira MIPLIB misc03:
+
+- misc03_variables.csv: colunas column, lower, upper, is_integer, obj_coeff
+- misc03_constraints.csv: colunas constraint, type (E = igualdade, L = <=, G = >=), rhs
+- misc03_coefficients.csv: colunas constraint, column, value (2.053 coeficientes não-nulos)
+
+O ambiente já tem Python 3.11 com PuLP e CBC instalados. NÃO acesse a internet.
+
+Você DEVE resolver a instância escrevendo e executando código Python (use a ferramenta bash). Leia os CSVs com pandas, monte o modelo no PuLP, resolva a relaxação linear e o problema inteiro.
+
+Ao final, responda de forma objetiva:
+
+1. Síntese do problema em no máximo 5 linhas.
+2. Apresente a função objetivo e o conjunto de restrições em forma matemática compacta.
+3. Informe o valor da relaxação linear Z_LP e o tempo de processamento.
+4. Informe o valor do ótimo inteiro Z_IP (Branch and Bound).
+5. Explique o integrality gap e como o B&B poda ramos.
+
+No final, inclua exatamente esta seção:
+
+RESUMO NUMERICO
+Z_LP = <valor>
+Z_IP = <valor>
+GAP_PCT = <valor>

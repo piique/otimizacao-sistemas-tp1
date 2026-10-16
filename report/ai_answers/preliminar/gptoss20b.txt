@@ -1,0 +1,97 @@
+> analista · gpt-oss:20b
+
+**1. Síntese do problema (≤ 5 linhas)**  
+É um programa linear inteiro misto (MIP) com 159 variáveis binárias (`COL001`‑`COL159`) e uma única variável contínua (`COL160`) cujo coeficiente na função objetivo é 1.  
+A variável `COL160` representa uma soma ponderada das variáveis binárias, pois a única restrição que a contém (ROW001) associa `COL160` a cada coluna com coeficientes negativos, de forma que  
+`COL160 = Σwᵢ·yᵢ`,  onde `yᵢ∈{0,1}`.  
+As restrições ROW 2‑6 (com RHS = 1) são todas iguais e impondo que **apenas uma** das variáveis binárias possa assumir 1 (soma de todas ≈ 1).  
+As demais restrições (L ≤ 200, G ≥ 1, etc.) não alteram esta pendência porque, quando apenas uma variável está ativa, as somas não excedem 200 nem ficam abaixo de 1.  
+
+---
+
+**2. Formulação matemática compacta**  
+
+```
+max     Z = COL160
+s.t.  Σ_{i=4,5,6} (-205)·y_i
+      + Σ_{i=7,8,9} (-550)·y_i
+      + Σ_{i=10,11,12} (-490)·y_i
+      + Σ_{i=13,14,15} (-660)·y_i
+      + Σ_{i=16,17,18,19,20,21} (-425)·y_i
+      + Σ_{i=28,29,30,31,32,33} (-350)·y_i
+      + Σ_{i=34,35,36,37,38,39} (-570)·y_i
+      + Σ_{i=40,41,42,44,45} (-285)·y_i
+      + … + Σ_{i=55,…,70} (-955)·y_i
+      + … + Σ_{i=145,146,…,160} (1)·COL160
+      = 0                                            (ROW001)
+
+Σ_{i=1}^{159} y_i = 1                                 (ROW 2-6  (identéticas))
+
+Σ_{i∈S_7} 100·y_i + Σ_{i∈T_7} y_i ≤ 200                (ROW 7)
+Σ_{i∈S_8} 100·y_i + … ≤ 200                         (ROW 8)
+Σ_{i∈S_9} 100·y_i + … ≤ 200                         (ROW 9)
+
+Σ_{i∈G_k} y_i ≥ 1    (k = 10…40)                      (ROW 10‑40)
+
+0 ≤ y_i ≤ 1  (i=1…159) ,  y_i∈{0,1}
+-∞ ≤ COL160 ≤ ∞ ,  COL160 is continuous
+```
+
+*(As listas `S_j` e `G_k` são exatamente as sentenças de coeficientes 100 e 1 encontradas nas linhas `ROW7`‑`ROW40`.)*
+
+---
+
+**3. Resolução da relaxação linear (ignora integralidade)**  
+
+No LP, as cinco restrições “Σ yᵢ = 1” são equivalentes (identéticas), portanto aceitamos uma combinação fracionária de variáveis.  
+A única restrição que realmente limita o ganho é a ROW001, que fixa `COL160` à soma ponderada.  
+Para maximizar `COL160` basta colocar todo o “peso” na variável que tem o maior coeficiente absoluto negativo em ROW001.  
+
+Coeficiente máximo (valor absoluto): **–955** (aparece em todas as colunas 55‑70, 81‑90, 102‑110, 118‑127, 138‑147, 158‑159).  
+
+Assim, no relaxamento linear:
+
+```
+COL160* = 955
+```
+
+e as variáveis individuais podem ser situadas em qualquer fração que satisfaça a soma total = 1; um padrão fracionário de 1/24 ≈ 0,04 para cada uma das 24 variáveis de peso –955 entrega exatamente 955.
+
+**Z_LP = 955.00**
+
+---
+
+**4. Resolução inteira (Branch & Bound)**  
+
+Como cada restrição “Σ yᵢ = 1” impede que duas variáveis distintas sejam simultaneamente ímpar, a solução inteira também precisa selecionar **exactamente uma** variável binária.  
+Portanto a estratégia inteira é escolher a mesma variável que maximiza `COL160`.  
+A melhor escolha inteira é **qualquer coluna com peso –955** (por exemplo, COL55).  
+
+```
+y55 = 1         (todas as demais y_i = 0)
+COL160 = 955
+```
+
+Não há preciso de ramificação adicional, pois a solução inteira já satisfaz todas as restrições.
+
+**Z_IP = 955.00**
+
+---
+
+**5. Gap de integridade e poda do B&B**  
+
+```
+Gap (em %) = |Z_LP – Z_IP| / Z_LP  × 100 = 0%
+```
+
+O gap é zero porque a relaxação linear já produz a mesma solução que a solução inteira: o modelo é *totally unimodular* no que diz respeito ao conjunto de restrições que controlam a cardinalidade das variáveis binárias.  
+O algoritmo B&B não precisa abrir ramos extenso, apenas verifica que a solução fracionária já satisfaça a integridade, encerrando assim o processo imediatamente.
+
+---
+
+### RESUMO NUMÉRICO
+```
+Z_LP   = 955.00
+Z_IP   = 955.00
+GAP_PCT = 0.00
+```
