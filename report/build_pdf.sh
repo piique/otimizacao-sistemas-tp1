@@ -12,6 +12,7 @@ docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
   -v "$ROOT":/data -w /data/report "$IMAGE" \
   --pdf-engine=xelatex \
   --lua-filter=pdf_filter.lua \
+  --include-before-body=capa.tex \
   -V mainfont="DejaVu Sans" \
   -V monofont="DejaVu Sans Mono" \
   -V geometry:margin=2.5cm \

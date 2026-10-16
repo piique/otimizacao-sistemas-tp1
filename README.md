@@ -47,6 +47,7 @@
 ├── report/
 │   ├── relatorio.md           # relatório (fonte)
 │   ├── relatorio.pdf          # relatório final (pandoc + xelatex)
+│   ├── capa.tex               # capa do PDF (integrantes)
 │   ├── build_pdf.sh           # gera o PDF em Docker
 │   ├── Dockerfile.pdf         # imagem pandoc/LaTeX do PDF
 │   ├── pdf_filter.lua         # ajuste de glifos Unicode
